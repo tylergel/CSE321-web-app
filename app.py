@@ -15,6 +15,17 @@ import json
 import os
 import requests
 import database
+import unittest
+
+
+class TestSum(unittest.TestCase):
+
+    def test_temperature(self, temp):
+        self.assertEqual(temp, '22', "Should be 21 as it is the first entry in DB")
+
+if __name__ == '__main__':
+    unittest.main()
+
 app = Flask(__name__, static_url_path='')
 app._static_folder = os.path.abspath("")
 
@@ -37,8 +48,9 @@ def main():
     temperature = db.getTemperatures()
     waterquality = db.getQualities()
     waterlevel = db.getLevels()
+    test = TestSum().test_temperature(db.getTemperatures()[0]['temperature']);
     hour = waterLevelHour(waterlevel)
-    return render_template('main.html', temperature=temperature,waterlevel=waterlevel, waterquality=waterquality, hour=hour)
+    return render_template('main.html', temperature=temperature,waterlevel=waterlevel, waterquality=waterquality, hour=hour, test=test)
 
 def waterLevelHour(waterlevel) :
     return int(waterlevel[0]['level']) - int(waterlevel[1]['level'])
