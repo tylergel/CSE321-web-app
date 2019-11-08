@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="manifest" href="/manifest.json">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    </head>
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">CSE321</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Home page</a>
+        </li>
+
+      </ul>
+    </nav>
+
+    <body>
+        <div class = "container">
+          <div class = "row">
+            <div class = "col-md-6 col-12 mt-5">
+
+              <table class = "col-12 table-striped">
+                <thead>
+                  <tr>
+                    <th colspan="2" = "table-primary">Temperature Readings</th>
+                  </tr>
+                  <tr>
+                    <th class = "table-info">temperature</th>
+                    <th class = "table-info">Timestamp</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                    {% for temp in temperature %}
+                    <tr>
+                      <td class = "table-success">  {{temp['temperature']}}</td>
+                      <td class = "table-success">  {{temp['time']}}</td>
+                    </tr>
+                    {%endfor%}
+
+                </tbody>
+              </table>
+            </div>
+            <div class = "col-md-6 col-12 mt-5">
+              <table class = "col-12 table-striped">
+                <thead>
+                  <tr>
+                    <th colspan="2" = "table-primary">Water Level Readings</th>
+                  </tr>
+                  <tr>
+                    <th class = "table-info">Water level</th>
+                    <th class = "table-info">Timestamp</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for level in waterlevel %}
+                    <tr>
+                      <td class = "table-success">  {{level['level']}}</td>
+                      <td class = "table-success">  {{level['time']}}</td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+            <div class = "row">
+              <div class = "col-md-6 col-12 mt-5">
+                <table class = "col-12 table-striped">
+                  <thead>
+                    <tr>
+                      <th colspan="2" = "table-primary">Water Quality Readings</th>
+                    </tr>
+                    <tr>
+                      <th class = "table-info" >Water Quality</th>
+                      <th class = "table-info" >Timestamp</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      {% for quality in waterquality %}
+                      <tr>
+                        <td class = "table-success">  {{quality['quality']}}</td>
+                        <td class = "table-success">  {{quality['time']}}</td>
+                      </tr>
+                      {%endfor%}
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class = "row">
+              <div class = "col-6 col-lg-4 mt-3">
+                    <div class="card border-success  mx-sm-1 p-3">
+                      <div class="text-success text-center mt-3"><h4>Water drank past hour:</h4></div>
+                      <div class="text-success text-center mt-2"><h1>{{hour}} ml</h1></div>
+                    </div>
+                  </div>
+
+            </div>
+          </div>
+
+        </div>
+    </body>
+</html>
