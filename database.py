@@ -16,10 +16,14 @@ import os
 
 class Database:
     def __init__(self):
-        host = "107.180.27.226"
-        user = "tylergel"
-        password = "tylergel"
-        db = "water-filter-app"
+        host = os.environ.get('host')
+        user = os.environ.get('user')
+        password=os.environ.get('password')
+        db=os.environ.get('db')
+        # host = "107.180.27.226"
+        # user = "tylergel"
+        # password = "tylergel"
+        # db = "water-filter-app"
         self.con = pymysql.connect(host=host, user=user, password=password, db=db, cursorclass=pymysql.cursors.
                                    DictCursor)
         self.cur = self.con.cursor()
@@ -33,5 +37,9 @@ class Database:
         return result
     def getLevels(self):
         self.cur.execute("SELECT * FROM level order by id DESC  LIMIT 25")
+        result = self.cur.fetchall()
+        return result
+    def getAllLevels(self):
+        self.cur.execute("SELECT * FROM level order by id DESC  LIMIT 720")
         result = self.cur.fetchall()
         return result

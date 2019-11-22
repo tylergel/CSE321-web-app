@@ -48,12 +48,23 @@ def main():
     temperature = db.getTemperatures()
     waterquality = db.getQualities()
     waterlevel = db.getLevels()
-    test = TestSum().test_temperature(db.getTemperatures()[0]['temperature']);
-    hour = waterLevelHour(waterlevel)
+    test = 1
+    #test = TestSum().test_temperature(db.getTemperatures()[0]['temperature']);
+    hour = waterLevelHour()
     return render_template('main.html', temperature=temperature,waterlevel=waterlevel, waterquality=waterquality, hour=hour, test=test)
 
-def waterLevelHour(waterlevel) :
-    return int(waterlevel[0]['level']) - int(waterlevel[1]['level'])
+def waterLevelHour() :
+    totalwater = 0
+    db = database.Database()
+    waterlevels = db.getAllLevels()
+    for index, water in enumerate(waterlevels) :
+        if index == 0 :
+            continue
+        delta = int(water['level']) - int(waterlevels[index-1]['level'])
+        if delta > 5 :
+            totalwater = totalwater + delta
+    return int(totalwater)
+
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
     app.debug = True
